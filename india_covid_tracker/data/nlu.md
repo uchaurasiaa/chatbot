@@ -57,12 +57,14 @@
 
 ## intent:covid_tracker_statewise
 - [Maharashtra](state)
+- [Maharastra](state)
 - [MH](state)
 - [Delhi](state)
 - [DL](state)
 - [Tamil Nadu](state)
 - [TN](state)
 - [Rajasthan](state)
+- [Rajastan](state)
 - [RJ](state)
 - [Madhya Pradesh](state)
 - [MP](state)
@@ -130,3 +132,4 @@
 - [LD](state)
 - [India](state)
 - [Total](state)
+- [TT](state)
