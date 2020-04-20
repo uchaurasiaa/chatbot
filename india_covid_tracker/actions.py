@@ -42,18 +42,28 @@ class ActionStatewiseTracker(Action):
         # print(tracker.latest_message)
         entities =  tracker.latest_message['entities']
         print("Latest Message : ", entities)
-
+        indian_states = {"MH":"Maharashtra", "DL":"Delhi", "TN":"Tamil Nadu", "RJ":"Rajasthan", "MP":"Madhya Pradesh", "GJ":"Gujarat", "UP":"Uttar Pradesh", \
+            "TG":"Telangana", "AP":"Andhra Pradesh", "KL":"Kerala", "JK":"Jammu and Kashmir", "KA":"Karnataka", "WB":"West Bengal", "HR":"Haryana", \
+			"PB":"Punjab", "BR":"Bihar", "OR":"Odisha", "UT":"Uttarakhand", "HP":"Himachal Pradesh", "CT":"Chhattisgarh", "AS":"Assam", "JH":"Jharkhand", \
+			"CH":"Chandigarh", "LA":"Ladakh", "AN":"Andaman and Nicobar Islands", "GA":"Goa", "PY":"Puducherry", "ML":"Meghalaya", "MN":"Manipur", \
+            "TR":"Tripura", "MZ":"Mizoram", "AR":"Arunachal Pradesh", "DN":"Dadra and Nagar Haveli", "NL":"Nagaland", \
+            "DD":"Daman and Diu", "LD":"Lakshadweep", "TT":"Total"}
         state = None
         for e in entities:
-            if e['entity'] == 'state':
+            # import sys, pdb; pdb.Pdb(stdout=sys.__stdout__).set_trace()
+            if (e['entity'] == 'state') and len(e['value']) > 2:
                 state = e['value']
+            else:
+                state = indian_states[e['value'].upper()]
+
+            message = "The state " + state + " Not found!!, Please enter correct state name."
+            if state == 'india':
+                state = 'Total'
             for data in response['statewise']:
                 if data['state'] == state.title():
                     print("Data is : ",data)
-                    # {'active': '45', 'confirmed': '83', 'deaths': '1', 'deltaconfirmed': '11', 'deltadeaths': '0', 'deltarecovered': '8', 
-                    # 'lastupdatedtime': '16/04/2020 23:13:07', 'recovered': '37', 'state': 'Bihar', 'statecode': 'BR', 'statenotes': ''}
-                    message = "Active : " + data['active'] + \
-                              " Confirmed : " + data['confirmed'] + \
+                    message = "Confirmed : " + data['confirmed'] + \
+                              " Active : " + data['active'] + \
                               " Recovered : " + data['recovered'] + \
                               " Deaths : "+ data['deaths'] + \
                               " Last Updated : " + data['lastupdatedtime'] + \
